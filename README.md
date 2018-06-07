@@ -1,4 +1,4 @@
-# ISD Scotland D3.js line chart template
+# ISD Scotland D3.js draft line chart template
 This is the first draft of a template to create line chart with option to select NHS Boards and locations within NHS Boards. The template consist out of 3 script files and a dummy data file:
 * index.html
 * js/isdcharts.js
