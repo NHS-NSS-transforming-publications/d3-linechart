@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Line Chart Template</title>
+  <!-- javascript libraries -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  
+  <!-- css formatting -->
+  <link rel="stylesheet" href="css/isdcharts.css">
+</head>
+
+<body>
+
+  <h3>Header</h3>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla enim animi dolorum suscipit modi, voluptas reprehenderit pariatur
+      nostrum delectus porro tempore repellat iure perferendis fugit quos ut tenetur perspiciatis. Suscipit. 
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime doloremque perferendis aliquid fuga aliquam?
+      Beatae veritatis sapiente perspiciatis autem assumenda ullam illum repudiandae nam non eum, repellat cumque tenetur eaque?
+       Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum blanditiis amet odit facere. Recusandae qui illo fugit sint cupiditate, ab, quae deleniti maxime suscipit eum quibusdam deserunt, obcaecati quod dolores!
+    </p>
+
+
+    <div>
+
+      <form>
+        <label>Select NHS Board:</label>
+        <select class="dropdown chart-1 I form-control" id="hb-chart-1">
+        <option value="NHSScotland">NHSScotland</option>
+        </select>
+
+        <label>Select Location:</label>
+        <select class="dropdown chart-1 II form-control" id="location-chart-1">
+        <option value="NHSScotland">All</option>
+        </select>
+      </form>
+    </div>
+    <h3>
+      <span id="chartLocation-chart-1"></span>
+    </h3>
+    
+    <div class="chart-div" id="figure-chart-1"></div>
+    <div class="figure-legend" id="figure-legend-chart-1"></div>
+
+  <script type="text/javascript" src="js/isdcharts.js"></script>
+
+</body>
+
+</html>

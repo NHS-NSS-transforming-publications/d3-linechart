@@ -1,0 +1,231 @@
+
+.colour__I--fill {
+   fill: #004785;
+}
+
+.colour__I--stroke {
+  stroke:#004785; 
+}
+
+.colour__I--color {
+  color:#004785; 
+}
+
+.colour__II--fill {
+   fill: #00a2e5;
+}
+
+.colour__II--stroke {
+  stroke: #00a2e5; 
+}
+
+.colour__II--color {
+  color: #00a2e5; 
+}
+
+.colour__III--fill {
+   fill: #4c7ea9;
+}
+
+.colour__III--stroke {
+  stroke: #4c7ea9; 
+}
+
+.colour__III--color {
+  color: #4c7ea9; 
+}
+
+.colour__IV--fill {
+   fill: #99daf5;
+}
+
+.colour__IV--stroke {
+  stroke: #99daf5; 
+}
+
+.colour__IV--color {
+  color: #99daf5; 
+}
+
+.colour__V--fill {
+  fill: #4cbeed;
+}
+
+.colour__V--stroke {
+  stroke: #4cbeed; 
+}
+
+.colour__V--color {
+  color: #4cbeed; 
+}
+
+.colour__VI--fill {
+  fill: #99b5ce;
+}
+
+.colour__VI--stroke {
+  stroke: #99b5ce; 
+}
+
+.colour__VI--color {
+  color: #99b5ce; 
+}
+
+.stroke--thin {
+  stroke-width: 1px;
+}
+
+.stroke--medium {
+  stroke-width: 2px;
+}
+
+.stroke--wide {
+  stroke-width: 3px
+}
+
+.stroke--extrawide {
+  stroke-width: 4px
+}
+
+.font-size--big {
+  font-size: 20px;
+ }
+
+.circle--hide {
+  opacity: 0;
+  transition: opacity 100ms;
+}
+
+.circle--highlight {
+  stroke-width: 4;
+  transition: stroke-width 200ms;
+}
+
+.hoverbars--highlight {
+  fill: lightgray;
+  opacity: 0.3;
+  transition: opacity 100ms;
+} 
+
+.hoverbars--hide {
+  opacity: 0;
+  fill: white;
+  transition: opacity 200ms;
+  }
+
+.figure-legend{
+  width: 65%;
+  max-width: 50%;
+  margin-left: 70px;
+  margin-right: auto;
+}
+
+.x-axis path,
+.x-axis line {
+  fill: none;
+  stroke: black;
+  }
+
+.x-axis text {
+  font-size:1em;
+}
+
+.y-axis path,
+.y-axis line {
+  fill: none;
+  stroke: black;
+  }
+
+.y-axis text {
+  font-size:1em;
+}
+
+.line {
+  fill: none;
+  }
+  
+select.dropdown{
+  width:200px;
+  }
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.x-axis > .tick {
+  opacity: 0;
+  }
+
+.chart-div {
+  margin: auto;
+}
+
+/*Chart format*/
+svg {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8em;
+}
+
+.x-axis > .tick:nth-last-child(24n+1) {
+  opacity: 1;
+ }
+
+  .figure--size {
+    width: 600px;
+    height:250px;
+    }
+
+@media screen and (min-width: 480px) {
+  .x-axis > .tick:nth-last-child(12n+1) {
+    opacity: 1;
+  }
+
+  .figure--size {
+    width: 500px;
+    height: 250px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .x-axis > .tick:nth-last-child(12n+1) {
+    opacity: 1;
+    }
+
+    .figure--size {
+    width: 600px;
+    height: 250px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+  .x-axis > .tick:nth-last-child(6n+1) {
+    opacity: 1;
+  }
+
+  .figure--size {
+    width: 700px;
+    height: 250px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .x-axis > .tick:nth-last-child(6n+1) {
+    opacity: 1;
+  }
+
+  .figure--size {
+    width: 800px;
+    height: 250px;
+  }
+}
+
+@media print {
+  .x-axis > .tick:nth-last-child(6n+1) {
+    opacity: 1;
+  }
+
+  .figure--size {
+    width: 1200px;
+    height: 250px;
+    }
+}
