@@ -1,11 +1,11 @@
 # ISD Scotland D3.js draft line chart template
-This is the first draft of a template to create line chart with option to select NHS Boards and locations within NHS Boards. The template consist out of 3 script files and a dummy data file:
+This is the first draft of a template to create line charts with options to select NHS Boards and locations within NHS Boards. The template consists of 3 script files and a dummy data file:
 * index.html
 * js/isdcharts.js
 * css/isdcharts.css
 
-The template is written in [HTML](https://developer.mozilla.org/en-US/docs/Learn/HTML), [CSS](https://developer.mozilla.org/en-US/docs/Learn/CSS) and [JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript) and uses the JavaScript libraries [D3.js](https://d3js.org/) and [jQuery](https://jquery.com/). To start working with the template download the zip file or clone the repository. To preview the page open the index.html file in [Firefox](https://www.mozilla.org/en-GB/firefox/) or preview  using an editor like [visual studio code](https://code.visualstudio.com/) or [atom](https://atom.io/).
-To use the template the following columns need to be included in the data file a date variable with the last date of a time period, NHS Board name variable and location name variable with up to 6 data variables. The rows need to be sorted on date and contain information on location level, NHS Board level with the NHS Board name also as location name and (NHS)Scotland level with location name (NHS)Scotland.  
+The template is written in [HTML](https://developer.mozilla.org/en-US/docs/Learn/HTML), [CSS](https://developer.mozilla.org/en-US/docs/Learn/CSS) and [JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript) and uses the JavaScript libraries [D3.js](https://d3js.org/) and [jQuery](https://jquery.com/). To start working with the template, download the zip file or clone the repository. To preview the page, open the index.html file in [Firefox](https://www.mozilla.org/en-GB/firefox/) or preview it using an editor like [visual studio code](https://code.visualstudio.com/) or [atom](https://atom.io/).
+To use the template, the following columns need to be included in the data file: a date variable with the last date of a time period, NHS Board name variable, and location name variable with up to 6 data variables. The rows need to be sorted by date and contain information on location level, NHS Board level with the NHS Board name also as location name and (NHS)Scotland level with location name (NHS)Scotland.  
 
 | date_variable |	nhs_board_name |	location_name |	variable_1 |	variable_2 |	
 | ----- | ----- | ----- | ----- | ----- |
@@ -14,15 +14,15 @@ To use the template the following columns need to be included in the data file a
 | 2016-03-06 |	NHS Ayrshire & Arran |	NHS Ayrshire & Arran |	122.4 |	244.8	|
 | 2016-03-06 |	NHSScotland |	NHSScotland |	122.4	| 264 |
 
-The use the template with a new data file the code in the top part of the JavaScript file (isdcharts.js) will need to be updated, see code below for instructions. 
+To use the template with a new data file, the code in the top part of the JavaScript file (isdcharts.js) will need to be updated. See code below for instructions. 
 
 ```javascript
   var filename = "ExampleDummyData.csv"; // update filename
   var dateFormatInput = "%Y-%m-%d"; // update date format to what's used in the data file 
-  // Please not that for csv files excel sometimes shows a different date format that the actual date format 
+  // Please note that for csv files Excel sometimes shows a different date format from the actual one. 
   var variableNamesBase = ["date_variable", "nhs_board_name", "location_name", "variable_1", "variable_2"] 
-  // Change variable names up to 6 variables can be included
-  // Please make sure these are ordered in date, nhs board name and location name, variable1, variable2 etc.
+  // Change variable names.  Up to 6 variables can be included.
+  // Please make sure these are ordered by date, nhs board name and location name, variable1, variable2 etc.
   var variableLabelBase = ["Year ending", "NHS Board", "Location", "variable 1", "variable 2"]
   // Change variable labels for the legend
   // Please make sure these are in the same order as the variable names
@@ -73,7 +73,7 @@ Besides the javascript code the html code might need to be updated
 
 ```html
 <!-- Copy the code below to add another chart to the page -->
-<!-- When using multpile charts update "chart-1" to "chart-2","chart-3" etc when using multiple charts -->
+<!-- When using multiple charts, update "chart-1" to "chart-2","chart-2" to "chart-3" etc -->
    <div>
       <form>
         <label>Select NHS Board:</label>
