@@ -70,7 +70,7 @@ function chart() {
         
         var YmaxValues = []
         for (var i = 3; i < variableNames.length; i++) {
-          YmaxValues[i - 3] = Scale.max.left = d3.max(dataset, function (d) { return d[variableNamesFunc[i]]; });
+          YmaxValues[i - 3] = Scale.max.left = d3.max(dataset, function (d) { return d[variableNames[i]]; });
         }
         Scale.max.left = d3.max(YmaxValues, function (d) { return d * 1.15; });
         
@@ -403,7 +403,7 @@ function chart() {
           this_circle[i] = d3.select(".circle." + classname + "."  + colourNumbers[i - 3] + "[cx=\"" + xCircle + "\"]");
           this_circle[i].classed("circle--hide", false);
           this_circle[i].classed("circle--highlight", true);
-          toolTipText.push("<span class='no-wrap'><span class='font-size--big colour__" + colourNumbers[i - 3] + "--color'>  &#9644;</strong></span>" + variableLabels[i] + ":" + format1000(d[variableNamesFunc[i]].toFixed(1)) + "</span>");
+          toolTipText.push("<span class='no-wrap'><span class='font-size--big colour__" + colourNumbers[i - 3] + "--color'>  &#9644;</strong></span>" + variableLabels[i] + ":" + format1000(d[variableNames[i]].toFixed(1)) + "</span>");
         }
         divTool.html(toolTipText.join("&nbsp;") + "<br><span class='no-wrap'><strong>" + dateFormat(d.date) + "</strong></span>");
       };
@@ -427,9 +427,9 @@ function chart() {
 
     // Dropdowns 
       function dropDownNHSBoard(data, classname, variableNames) {
-        var dataname = data.filter(function (d) { return d[variableNamesFunc[1]].substr(d[variableNamesFunc[1]].length - 8) !== "Scotland"});
+        var dataname = data.filter(function (d) { return d[variableNames[1]].substr(d[variableNames[1]].length - 8) !== "Scotland"});
         var selectvalues = d3.nest()
-          .key(function (d) { return d[variableNamesFunc[1]]; })
+          .key(function (d) { return d[variableNames[1]]; })
           .entries(dataname);
 
         for (var i = 0; i < selectvalues.length; i++) {
@@ -441,12 +441,12 @@ function chart() {
         $("#location-" + classname).children().remove();
 
         var hbname = $("#hb-" + classname).val();
-        var LatestDate = data[data.length - 1][variableNamesFunc[0]];
+        var LatestDate = data[data.length - 1][variableNames[0]];
       
-        var dataname = data.filter(function (d) { return d[variableNamesFunc[1]] === hbname && d[variableNamesFunc[2]] !== hbname && d[variableNamesFunc[0]] === LatestDate});
+        var dataname = data.filter(function (d) { return d[variableNames[1]] === hbname && d[variableNames[2]] !== hbname && d[variableNames[0]] === LatestDate});
 
         var selectvalues = d3.nest()
-          .key(function (d) { return d[variableNamesFunc[2]]; })
+          .key(function (d) { return d[variableNames[2]]; })
           .entries(dataname);
 
         var boardname = "NHS Board";
@@ -502,7 +502,7 @@ function chart() {
 
           var YmaxValues = []
           for (var i = 3; i < variableNames.length; i++) {
-            YmaxValues[i-3] = Scale.max.left = d3.max(dataset, function (d) { return d[variableNamesFunc[i]]; });
+            YmaxValues[i-3] = Scale.max.left = d3.max(dataset, function (d) { return d[variableNames[i]]; });
           }
           Scale.max.left = d3.max(YmaxValues, function (d) { return d * 1.15; });
           
