@@ -27,8 +27,8 @@ function chart() {
       ylabel = "y label",
       dateFormatOutput =  "%b%y",
       circlesize = 3, 
-      variableNamesFunc = variableNamesBase,
-      variableLabelsFunc = variableLabelBase,
+      variableNames = variableNamesBase,
+      variableLabels = variableLabelBase,
       colourNumbers = ["I", "II", "III", "IV", "V", "VI"],
       margin = {
         top: 5, right: 20, bottom: 40, left: 50
@@ -69,7 +69,7 @@ function chart() {
       function yScaleUpdate(dataset, chart, Scale, variable, classname) {
         
         var YmaxValues = []
-        for (var i = 3; i < variableNamesFunc.length; i++) {
+        for (var i = 3; i < variableNames.length; i++) {
           YmaxValues[i - 3] = Scale.max.left = d3.max(dataset, function (d) { return d[variableNamesFunc[i]]; });
         }
         Scale.max.left = d3.max(YmaxValues, function (d) { return d * 1.15; });
@@ -204,13 +204,13 @@ function chart() {
       };
 
     // Legend
-      function drawLegend(classname, variableNamesFunc, variableLabelsFunc, colourNumbers) {
+      function drawLegend(classname, variableNames, variableLabels, colourNumbers) {
         var divTool = d3.select("#figure-legend-" + classname);
         var toolTipText = [];
         var this_circle = [];
         
-        for (var i = 3; i < variableNamesFunc.length; i++) {
-          toolTipText.push("<span class='no-wrap'><span class='font-size--big colour__" + colourNumbers[i - 3] + "--color'> &#9644;</strong></span>" + variableLabelsFunc[i] + "</span>");
+        for (var i = 3; i < variableNames.length; i++) {
+          toolTipText.push("<span class='no-wrap'><span class='font-size--big colour__" + colourNumbers[i - 3] + "--color'> &#9644;</strong></span>" + variableLabels[i] + "</span>");
         }
 
         divTool.html(toolTipText.join(" &nbsp;"));
@@ -305,7 +305,7 @@ function chart() {
       };
 
     // Hoverbar - for tooltip and highlighting
-      function drawHoverBar(dataset, chart, Scale, barclass, classname, variableNamesFunc, variableLabelsFunc, colourNumbers) {
+      function drawHoverBar(dataset, chart, Scale, barclass, classname, variableNames, variableLabels, colourNumbers) {
         chart.selectAll("bars")
           .data(dataset)
           .enter()
@@ -320,7 +320,7 @@ function chart() {
             this_bar.classed("hoverbars--hide", true);
             this_bar.classed("hoverbars--highlight", false);
             mouseOutBar(d, Scale, classname);
-            drawLegend(classname, variableNamesFunc, variableLabelsFunc, colourNumbers);
+            drawLegend(classname, variableNames, variableLabels, colourNumbers);
           })
           .on("mouseover", function (d) {
 
@@ -328,7 +328,7 @@ function chart() {
             this_bar.classed("hoverbars--hide", false);
             this_bar.classed("hoverbars--highlight", true);
 
-            mouseOverBar(d, Scale, classname, variableNamesFunc, variableLabelsFunc, colourNumbers);
+            mouseOverBar(d, Scale, classname, variableNames, variableLabels, colourNumbers);
           });     
       };
 
@@ -345,7 +345,7 @@ function chart() {
         chart.selectAll(".hoverbars." + barclass).remove();
       }
 
-      function updateHoverBar(dataset, chart, Scale, barclass, classname, variableNamesFunc, variableLabelsFunc, colourNumbers) {
+      function updateHoverBar(dataset, chart, Scale, barclass, classname, variableNames, variableLabels, colourNumbers) {
         var bar = chart.selectAll(".hoverbars." + barclass)
           .data(dataset);
 
@@ -375,7 +375,7 @@ function chart() {
             var this_bar = d3.select(this);
             this_bar.classed("hoverbars--hide", true);
             this_bar.classed("hoverbars--highlight", false);
-            drawLegend(classname, variableNamesFunc, variableLabelsFunc, colourNumbers);
+            drawLegend(classname, variableNames, variableLabels, colourNumbers);
             mouseOutBar(d, Scale, classname);
           })
           .on("mouseover", function (d) {
@@ -384,11 +384,11 @@ function chart() {
             this_bar.classed("hoverbars--hide", false);
             this_bar.classed("hoverbars--highlight", true);
 
-            mouseOverBar(d, Scale, classname, variableNamesFunc, variableLabelsFunc, colourNumbers);
+            mouseOverBar(d, Scale, classname, variableNames, variableLabels, colourNumbers);
           });
       };
 
-      function mouseOverBar(d, Scale, classname, variableNamesFunc, variableLabelsFunc, colourNumbers) {
+      function mouseOverBar(d, Scale, classname, variableNames, variableLabels, colourNumbers) {
         var x = Scale.x(d.date);
         var dateFormat = d3.timeFormat("%d %B %Y");
         var xCircle = x + (Scale.x.bandwidth() / 2);
@@ -398,12 +398,12 @@ function chart() {
         var divTool = d3.select("#figure-legend-" + classname);
         var toolTipText = [];
         var this_circle = [];
-        for (var i = 3; i < variableNamesFunc.length; i++) {
+        for (var i = 3; i < variableNames.length; i++) {
 
           this_circle[i] = d3.select(".circle." + classname + "."  + colourNumbers[i - 3] + "[cx=\"" + xCircle + "\"]");
           this_circle[i].classed("circle--hide", false);
           this_circle[i].classed("circle--highlight", true);
-          toolTipText.push("<span class='no-wrap'><span class='font-size--big colour__" + colourNumbers[i - 3] + "--color'>  &#9644;</strong></span>" + variableLabelsFunc[i] + ":" + format1000(d[variableNamesFunc[i]].toFixed(1)) + "</span>");
+          toolTipText.push("<span class='no-wrap'><span class='font-size--big colour__" + colourNumbers[i - 3] + "--color'>  &#9644;</strong></span>" + variableLabels[i] + ":" + format1000(d[variableNamesFunc[i]].toFixed(1)) + "</span>");
         }
         divTool.html(toolTipText.join("&nbsp;") + "<br><span class='no-wrap'><strong>" + dateFormat(d.date) + "</strong></span>");
       };
@@ -426,7 +426,7 @@ function chart() {
       };
 
     // Dropdowns 
-      function dropDownNHSBoard(data, classname, variableNamesFunc) {
+      function dropDownNHSBoard(data, classname, variableNames) {
         var dataname = data.filter(function (d) { return d[variableNamesFunc[1]].substr(d[variableNamesFunc[1]].length - 8) !== "Scotland"});
         var selectvalues = d3.nest()
           .key(function (d) { return d[variableNamesFunc[1]]; })
@@ -437,7 +437,7 @@ function chart() {
         };
       };
 
-      function dropDownLocation(data, classname, variableNamesFunc) {
+      function dropDownLocation(data, classname, variableNames) {
         $("#location-" + classname).children().remove();
 
         var hbname = $("#hb-" + classname).val();
@@ -463,10 +463,10 @@ function chart() {
 
       // Charts
       // Line chart
-        function LineChart(startdata, classname, htmlFigureId, xLabel, ylabel, dateFormatOutput, circlesize, variableNamesFunc, variableLabelsFunc, colourNumbers, margin) {
+        function LineChart(startdata, classname, htmlFigureId, xLabel, ylabel, dateFormatOutput, circlesize, variableNames, variableLabels, colourNumbers, margin) {
           if (document.querySelector("#hb-" + classname).children.length < 2) {
-            dropDownNHSBoard(startdata, classname, variableNamesFunc);
-            dropDownLocation(startdata, classname, variableNamesFunc);
+            dropDownNHSBoard(startdata, classname, variableNames);
+            dropDownLocation(startdata, classname, variableNames);
           };
 
           var dataset = [];
@@ -483,7 +483,7 @@ function chart() {
             xFormat: d3.timeFormat(dateFormatOutput)
           };
 
-          drawLegend(classname, variableNamesFunc, variableLabelsFunc, colourNumbers); 
+          drawLegend(classname, variableNames, variableLabels, colourNumbers); 
 
           var svg = d3.select(htmlFigureId)
             .append("svg")
@@ -496,29 +496,29 @@ function chart() {
 
           chartWidthHeight(chart, htmlFigureId);
 
-          dataset = dataUpdate(startdata, variableNamesFunc[2], "#location-" + classname);
+          dataset = dataUpdate(startdata, variableNames[2], "#location-" + classname);
 
           chartLocationUpdate("location-" + classname, "chartLocation-" + classname);
 
           var YmaxValues = []
-          for (var i = 3; i < variableNamesFunc.length; i++) {
+          for (var i = 3; i < variableNames.length; i++) {
             YmaxValues[i-3] = Scale.max.left = d3.max(dataset, function (d) { return d[variableNamesFunc[i]]; });
           }
           Scale.max.left = d3.max(YmaxValues, function (d) { return d * 1.15; });
           
           chartScale(dataset, chart, Scale);
 
-          for (var i = 3; i < variableNamesFunc.length; i++) {
-            drawLine(dataset, chart, Scale, "left", variableNamesFunc[i], classname + " " + colourNumbers[i - 3] + " stroke--medium colour__" + colourNumbers[i-3] + "--stroke");
+          for (var i = 3; i < variableNames.length; i++) {
+            drawLine(dataset, chart, Scale, "left", variableNames[i], classname + " " + colourNumbers[i - 3] + " stroke--medium colour__" + colourNumbers[i-3] + "--stroke");
 
-            drawCircles(dataset, chart, Scale, "left", variableNamesFunc[i], circlesize, classname + " " + colourNumbers[i - 3] +  " circle--hide colour__" + colourNumbers[i - 3] + "--fill " + "colour__" + colourNumbers[i - 3] + "--stroke");
+            drawCircles(dataset, chart, Scale, "left", variableNames[i], circlesize, classname + " " + colourNumbers[i - 3] +  " circle--hide colour__" + colourNumbers[i - 3] + "--fill " + "colour__" + colourNumbers[i - 3] + "--stroke");
           }
         
           drawAxis(chart, Scale, classname);
 
           drawLabels(svg, chart, "xlabel", xLabel, "ylabel-left", ylabel);
 
-          drawHoverBar(dataset, chart, Scale, classname, classname, variableNamesFunc, variableLabelsFunc,colourNumbers);
+          drawHoverBar(dataset, chart, Scale, classname, classname, variableNames, variableLabels,colourNumbers);
         
           $(window).on('resize', function () {
 
@@ -526,8 +526,8 @@ function chart() {
 
             resizeXaxis(chart, Scale, classname);
             
-            for (var i = 3; i < variableNamesFunc.length; i++) {
-              resizeLine(chart, Scale, "left", variableNamesFunc[i], classname + "." + colourNumbers[i - 3]);
+            for (var i = 3; i < variableNames.length; i++) {
+              resizeLine(chart, Scale, "left", variableNames[i], classname + "." + colourNumbers[i - 3]);
 
               resizeCircle(dataset, chart, Scale, classname + "." + colourNumbers[i - 3]);
             }
@@ -540,32 +540,32 @@ function chart() {
           $(".dropdown." + classname + ".I")
             .on("change", function () {
 
-              dropDownLocation(startdata, classname, variableNamesFunc);
+              dropDownLocation(startdata, classname, variableNames);
 
               var previousDataLength = dataset.length;
 
-              dataset = dataUpdate(startdata, variableNamesFunc[2], "#location-" + classname);
+              dataset = dataUpdate(startdata, variableNames[2], "#location-" + classname);
               var newDataLength = dataset.length;
 
               chartLocationUpdate("location-" + classname, "chartLocation-" + classname);
 
-              Scale = yScaleUpdate(dataset, chart, Scale, variableNamesFunc[3], classname);
+              Scale = yScaleUpdate(dataset, chart, Scale, variableNames[3], classname);
           
-              for (var i = 3; i < variableNamesFunc.length; i++) {
+              for (var i = 3; i < variableNames.length; i++) {
                 if (previousDataLength < newDataLength) {
-                  redrawLineUpdate(dataset, chart, Scale, "left", variableNamesFunc[i], classname, classname + " " + colourNumbers[i - 3] + " stroke--medium colour__" + colourNumbers[i - 3] + "--stroke", colourNumbers[i - 3]);
+                  redrawLineUpdate(dataset, chart, Scale, "left", variableNames[i], classname, classname + " " + colourNumbers[i - 3] + " stroke--medium colour__" + colourNumbers[i - 3] + "--stroke", colourNumbers[i - 3]);
                 }
                 else {
-                lineUpdate(dataset, chart, Scale, "left", variableNamesFunc[i], classname, classname + " " + colourNumbers[i - 3] + " stroke--medium colour__" + colourNumbers[i - 3] + "--stroke", colourNumbers[i - 3]);
+                lineUpdate(dataset, chart, Scale, "left", variableNames[i], classname, classname + " " + colourNumbers[i - 3] + " stroke--medium colour__" + colourNumbers[i - 3] + "--stroke", colourNumbers[i - 3]);
               }
-                circleUpdate(dataset, chart, Scale, "left", circlesize, variableNamesFunc[i], classname, colourNumbers[i - 3]);
+                circleUpdate(dataset, chart, Scale, "left", circlesize, variableNames[i], classname, colourNumbers[i - 3]);
                     }
               if (previousDataLength < newDataLength) {
                 removeHoverBar(chart, classname);
-                drawHoverBar(dataset, chart, Scale, classname, classname, variableNamesFunc, variableLabelsFunc, colourNumbers);
+                drawHoverBar(dataset, chart, Scale, classname, classname, variableNames, variableLabels, colourNumbers);
               }
               else {
-                updateHoverBar(dataset, chart, Scale, classname, classname, variableNamesFunc, variableLabelsFunc, colourNumbers)
+                updateHoverBar(dataset, chart, Scale, classname, classname, variableNames, variableLabels, colourNumbers)
               }
             });
 
@@ -573,31 +573,31 @@ function chart() {
             .on("change", function () {
               var previousDataLength = dataset.length;
               
-              dataset = dataUpdate(startdata, variableNamesFunc[2], "#location-" + classname);
+              dataset = dataUpdate(startdata, variableNames[2], "#location-" + classname);
               var newDataLength = dataset.length;
             
               chartLocationUpdate("location-" + classname, "chartLocation-" + classname);
 
-              Scale = yScaleUpdate(dataset, chart, Scale, variableNamesFunc[3], classname);
+              Scale = yScaleUpdate(dataset, chart, Scale, variableNames[3], classname);
 
               
 
-              for (var i = 3; i < variableNamesFunc.length; i++) {
+              for (var i = 3; i < variableNames.length; i++) {
                 if (previousDataLength < newDataLength) {
-                  redrawLineUpdate(dataset, chart, Scale, "left", variableNamesFunc[i], classname, classname + " " + colourNumbers[i - 3] + " stroke--medium colour__" + colourNumbers[i - 3] + "--stroke", colourNumbers[i - 3]);
+                  redrawLineUpdate(dataset, chart, Scale, "left", variableNames[i], classname, classname + " " + colourNumbers[i - 3] + " stroke--medium colour__" + colourNumbers[i - 3] + "--stroke", colourNumbers[i - 3]);
                 }
                 else {
-                  lineUpdate(dataset, chart, Scale, "left", variableNamesFunc[i], classname, classname + " " + colourNumbers[i - 3] + " stroke--medium colour__" + colourNumbers[i - 3] + "--stroke", colourNumbers[i - 3]);
+                  lineUpdate(dataset, chart, Scale, "left", variableNames[i], classname, classname + " " + colourNumbers[i - 3] + " stroke--medium colour__" + colourNumbers[i - 3] + "--stroke", colourNumbers[i - 3]);
                 }
-                circleUpdate(dataset, chart, Scale, "left", circlesize, variableNamesFunc[i], classname, colourNumbers[i - 3]);
+                circleUpdate(dataset, chart, Scale, "left", circlesize, variableNames[i], classname, colourNumbers[i - 3]);
               }
 
               if (previousDataLength < newDataLength) {
                 removeHoverBar(chart, classname);
-                drawHoverBar(dataset, chart, Scale, classname, classname, variableNamesFunc, variableLabelsFunc, colourNumbers);
+                drawHoverBar(dataset, chart, Scale, classname, classname, variableNames, variableLabels, colourNumbers);
               }
               else {
-                updateHoverBar(dataset, chart, Scale, classname, classname, variableNamesFunc, variableLabelsFunc, colourNumbers)
+                updateHoverBar(dataset, chart, Scale, classname, classname, variableNames, variableLabels, colourNumbers)
               }
             });
         };
