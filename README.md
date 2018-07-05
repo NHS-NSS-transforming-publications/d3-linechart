@@ -23,7 +23,7 @@ To use the template with a new data file, the code in the top part of the JavaSc
   var variableNamesBase = ["date_variable", "nhs_board_name", "location_name", "variable_1", "variable_2"] 
   // Change variable names.  Up to 6 variables can be included.
   // Please make sure these are ordered by date, nhs board name and location name, variable1, variable2 etc.
-  var variableLabelBase = ["Year ending", "NHS Board", "Location", "variable 1", "variable 2"]
+  var variableLabelsBase = ["Year ending", "NHS Board", "Location", "variable 1", "variable 2"]
   // Change variable labels for the legend
   // Please make sure these are in the same order as the variable names
   
@@ -48,9 +48,10 @@ To use the template with a new data file, the code in the top part of the JavaSc
       ylabel = "y label", // update
       dateFormatOutput =  "%b%y",// format for date on the x axis
       circlesize = 3, // set circle size of circles that appear when hovering over the chart
-      variableNamesFunc = variableNamesBase,// update if creating new chart with same data for example:
-      // variableNamesFunc = ["date_variable", "nhs_board_name", "location_name", "variable_3"]
-      variableLabelsFunc = variableLabelBase, //update if creating another chart from same data
+      variableNames = variableNamesBase,// update if creating new chart with same data for example:
+      // variableNames = ["date_variable", "nhs_board_name", "location_name", "variable_3"]
+      variableLabels = variableLabelsBase, //update if creating another chart from same data
+      //variableLabels = ["Year ending", "NHS Board", "Location", "variable 1", "variable 2", "variable 3"]
       colourNumbers = ["I", "II", "III", "IV", "V", "VI"], 
       // The numbers correspond to the following colours: 
       //I - #004785, II - #00a2e5, III - #4c7ea9, IV - #99daf5, V - #4cbeed, VI - #99b5ce
