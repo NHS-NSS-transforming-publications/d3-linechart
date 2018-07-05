@@ -5,7 +5,7 @@ function chart() {
   var filename = "ExampleDummyData.csv";
   var dateFormatInput = "%Y-%m-%d";
   var variableNamesBase = ["date_variable", "nhs_board_name", "location_name", "variable_1", "variable_2", "variable_3", "variable_4"]//, "variable_5", "variable_6"]
-  var variableLabelBase = ["Year ending", "NHS Board", "Location", "variable 1", "variable 2", "variable 3", "variable 4"]//, "variable 5", "variable 6"];
+  var variableLabelsBase = ["Year ending", "NHS Board", "Location", "variable 1", "variable 2", "variable 3", "variable 4"]//, "variable 5", "variable 6"];
 
   d3.csv("data/" + filename, function (error, basedata) {
 
@@ -28,7 +28,7 @@ function chart() {
       dateFormatOutput =  "%b%y",
       circlesize = 3, 
       variableNames = variableNamesBase,
-      variableLabels = variableLabelBase,
+      variableLabels = variableLabelsBase,
       colourNumbers = ["I", "II", "III", "IV", "V", "VI"],
       margin = {
         top: 5, right: 20, bottom: 40, left: 50
